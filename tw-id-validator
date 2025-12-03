@@ -1,0 +1,134 @@
+package test;
+import java.util.*;
+public class Main { 
+    public static void main(String[] args) { 
+        int[] weights = {8,7,6,5,4,3,2,1};
+        Scanner sc = new Scanner(System.in);
+        String numbers = sc.nextLine(); 
+        int s=0;
+        String validInput = check(sc, numbers); 
+
+        for(int i=0;i<8;i++){
+            int num = validInput.charAt(i) - '0'; // 將字元轉成數字
+            s += num * weights[i]; 
+        }   
+        for(char ch = 'A'; ch <= 'Z'; ch++) {
+            int code = replace(ch); // 字母轉整數
+            int X = code / 10;           // 十位
+            int Y = code % 10;           // 個位
+            int Z = (10 - ((X*1 + Y*9 + s) % 10)) % 10; 
+            if(Z==(validInput.charAt(8)-'0')){
+                System.out.print(ch);
+            }
+        }
+    }
+/*算術另外的解法
+for(char ch = 'A'; ch <= 'Z'; ch++) {
+    int code = replace(ch); // 字母轉整數
+    int X = code / 10;           // 十位
+    int Y = code % 10;           // 個位
+
+    // 計算總和
+    int sum = X*1 + Y*9 
+              + digits[0]*8 + digits[1]*7 + digits[2]*6 + digits[3]*5
+              + digits[4]*4 + digits[5]*3 + digits[6]*2 + digits[7]*1;
+
+    int check = 10 - (sum % 10);
+
+    if(check == userInputLastDigit) {
+        System.out.println(ch + " 可能是第一個字母");
+    }
+}
+
+*/
+
+    public static String check(Scanner sc, String numbers) {
+    //驗證輸入是否九位數+是否全都為數字
+        while (true) {
+            if (numbers.length() != 9) {
+                System.out.println("要輸入九碼!!");
+            } else {
+                boolean allDigits = true;
+            for (int i = 0; i < numbers.length(); i++) {
+                char ch = numbers.charAt(i);
+                if (ch < '0' || ch > '9') {
+                    allDigits = false;
+                    break;
+                }
+            }
+            if (allDigits) {
+                return numbers; // 合法輸入，回傳
+            } else {
+                System.out.println("只能輸入數字!!");
+            }
+        }
+        System.out.print("請重新輸入: ");
+        numbers = sc.nextLine(); // 重新輸入
+    }}
+
+/*這方式驗證數值為最乾淨的方法
+public static String check(Scanner sc, String numbers) {
+
+    // 檢查長度
+    while (numbers.length() != 9) {
+        System.out.println("要輸入九碼!!");
+        numbers = sc.nextLine();
+    }
+
+    // 檢查是否都是數字
+    while (!numbers.matches("\\d{9}")) {
+        System.out.println("只能輸入數字!!");
+        numbers = sc.nextLine();
+
+        // 再次檢查長度
+        while (numbers.length() != 9) {
+            System.out.println("要輸入九碼!!");
+            numbers = sc.nextLine();
+        }
+    }
+
+    return numbers;  // 回傳合法的 9 碼字串
+}
+*/
+/*方法三
+ * public static String check(Scanner sc, String numbers) {
+    while (numbers.length() != 9 || !numbers.matches("\\d{9}")) {
+        System.out.println("請輸入九位數字:");
+        numbers = sc.nextLine();
+    }
+    return numbers;
+}
+
+*/
+    public static int replace(char c){
+        switch(c){
+            case 'A':return 10;
+            case 'B':return 11;
+            case 'C':return 12;
+            case 'D':return 13;
+            case 'E':return 14;
+            case 'F':return 15;
+            case 'G':return 16;
+            case 'H':return 17;
+            case 'I':return 34;
+            case 'J':return 18;
+            case 'K':return 19;
+            case 'L':return 20;
+            case 'M':return 21;
+            case 'N':return 22;
+            case 'O':return 35;
+            case 'P':return 23;
+            case 'Q':return 24;
+            case 'R':return 25;
+            case 'S':return 26;
+            case 'T':return 27;
+            case 'U':return 28;
+            case 'V':return 29;
+            case 'W':return 32;
+            case 'X':return 30;
+            case 'Y':return 31;
+            case 'Z':return 33;
+            default: return 0;
+        }
+    }
+}
