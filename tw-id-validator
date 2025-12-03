@@ -3,8 +3,10 @@ import java.util.*;
 public class Main { 
     public static void main(String[] args) { 
         int[] weights = {8,7,6,5,4,3,2,1};
+        
         Scanner sc = new Scanner(System.in);
         String numbers = sc.nextLine(); 
+        
         int s=0;
         String validInput = check(sc, numbers); 
 
@@ -16,8 +18,8 @@ public class Main {
             int code = replace(ch); // 字母轉整數
             int X = code / 10;           // 十位
             int Y = code % 10;           // 個位
-            int Z = (10 - ((X*1 + Y*9 + s) % 10)) % 10; 
-            if(Z==(validInput.charAt(8)-'0')){
+            int Z = (10 - ((X*1 + Y*9 + s) % 10)) % 10; //驗證碼
+            if(Z==(validInput.charAt(8)-'0')){          //validInput.charAt(8)-'0'為將最後一碼轉數值做比較
                 System.out.print(ch);
             }
         }
